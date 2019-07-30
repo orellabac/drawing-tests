@@ -92,26 +92,32 @@
   ]
 }
 </textarea>
-<button> Dibujar </button>
+<button onclick="dibujar()"> Dibujar </button>
 <br>
 <br>
 <br>
 <br>
-<canvas id="yellow" width="250" height="400"></canvas>
+<canvas id="yellow" width="800" height="800"></canvas>
 <script>
-  var json = JSON.parse(document.getElementById("json").value);
-  var c=document.getElementById("yellow");
-  var width =json['width'];
-  var height=json['height'];
-  c.width = width;
-  c.height = height;
+var c=document.getElementById("yellow");
+// var width =json['width'];
+// var height=json['height'];
+// c.width = width;
+// c.height = height;
 var ctx=c.getContext("2d");
-ctx.fillStyle="#ffca05";
-ctx.globalAlpha=0.7;
-ctx.strokeStyle="#ffca05";
-ctx.fill();
-ctx.stroke();
-drawComponent(json);
+
+function dibujar() 
+{
+  ctx.fillStyle = "rgb(255, 255, 255)";
+  ctx.clearRect(0, 0, ctx.width, ctx.height);
+  var json = JSON.parse(document.getElementById("json").value);
+  ctx.fillStyle="#ffca05";
+  ctx.globalAlpha=0.7;
+  ctx.strokeStyle="#ffca05";
+  ctx.fill();
+  ctx.stroke();
+  drawComponent(json);
+}
 
 function drawComponent(c) 
 {
