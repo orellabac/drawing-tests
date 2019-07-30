@@ -1,1 +1,136 @@
 <div id="app"></div>
+<textarea id="json" rows="100" cols="80">
+{
+  "type": "Hosting.Form1",
+  "name": "Form1",
+  "top": 15,
+  "left": 15,
+  "width": 800,
+  "height": 800,
+  "childrencount": 8,
+  "children": [
+    {
+      "type": "System.Windows.Forms.TextBox",
+      "name": "TextBox3",
+      "top": 465,
+      "left": 137,
+      "width": 152,
+      "height": 21,
+      "childrencount": 0,
+      "children": []
+    },
+    {
+      "type": "System.Windows.Forms.Label",
+      "name": "Label3",
+      "top": 465,
+      "left": 68,
+      "width": 109,
+      "height": 23,
+      "childrencount": 0,
+      "children": []
+    },
+    {
+      "type": "System.Windows.Forms.TextBox",
+      "name": "TextBox2",
+      "top": 499,
+      "left": 137,
+      "width": 152,
+      "height": 21,
+      "childrencount": 0,
+      "children": []
+    },
+    {
+      "type": "System.Windows.Forms.TextBox",
+      "name": "TextBox1",
+      "top": 543,
+      "left": 137,
+      "width": 152,
+      "height": 21,
+      "childrencount": 0,
+      "children": []
+    },
+    {
+      "type": "System.Windows.Forms.Label",
+      "name": "Label2",
+      "top": 541,
+      "left": 68,
+      "width": 100,
+      "height": 23,
+      "childrencount": 0,
+      "children": []
+    },
+    {
+      "type": "System.Windows.Forms.Label",
+      "name": "Label1",
+      "top": 499,
+      "left": 68,
+      "width": 100,
+      "height": 23,
+      "childrencount": 0,
+      "children": []
+    },
+    {
+      "type": "System.Windows.Forms.Button",
+      "name": "Button2",
+      "top": 641,
+      "left": 118,
+      "width": 75,
+      "height": 23,
+      "childrencount": 0,
+      "children": []
+    },
+    {
+      "type": "System.Windows.Forms.Button",
+      "name": "Button1",
+      "top": 641,
+      "left": 214,
+      "width": 75,
+      "height": 23,
+      "childrencount": 0,
+      "children": []
+    }
+  ]
+}
+</textarea>
+<button> Dibujar </button>
+<br>
+<br>
+<br>
+<br>
+<canvas id="yellow" width="250" height="400"></canvas>
+<script>
+  var json = JSON.parse(document.getElementById("json").value);
+  var c=document.getElementById("yellow");
+  var width =json['width'];
+  var height=json['height'];
+  c.width = width;
+  c.height = height;
+var ctx=c.getContext("2d");
+ctx.fillStyle="#ffca05";
+ctx.globalAlpha=0.7;
+ctx.strokeStyle="#ffca05";
+ctx.fill();
+ctx.stroke();
+drawComponent(json);
+
+function drawComponent(c) 
+{
+  console.log("drawing " + c.name);
+  var top =  c["top"];
+  var left =  c["left"];
+  var width = c['width'];
+  var height= c['height'];
+  drawBorder(top, left, width, height);
+  for(var i = 0;i<c.childrencount;i++)
+  {
+    var child = c.children[i];
+    drawComponent(child);
+  }
+}
+
+function drawBorder(xPos, yPos, width, height, thickness = 1)
+{
+  ctx.fillStyle='#000';
+  ctx.fillRect(xPos - (thickness), yPos - (thickness), width + (thickness * 2), height + (thickness * 2));
+}
+</script>
